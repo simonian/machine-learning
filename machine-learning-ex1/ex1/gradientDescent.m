@@ -18,7 +18,7 @@ for iter = 1:num_iters
     %
 
     J = computeCost(X, y, theta);
-    delta = (alpha/m * (X * theta - y)' * X)';
+    delta = (alpha/m .* (X * theta - y)' * X)';
     theta = theta - delta;
 
     % ============================================================
