@@ -15,11 +15,20 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
+p = sigmoid(X * theta);
 
+rows = rows(p);
+cols = columns(p);
 
-
-
-
+for i = 1:rows
+  for j = 1:cols
+    if p(i,j) >= 0.5
+        p(i,j) = 1;
+    else
+        p(i,j) = 0;
+    endif
+  endfor
+endfor
 
 % =========================================================================
 

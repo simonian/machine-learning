@@ -116,7 +116,7 @@ xlabel('Exam 1 score')
 ylabel('Exam 2 score')
 
 % Specified in plot order
-legend('Admitted', 'Not admitted')
+legend('Admitted', 'Not admitted', 'Decision Boundary')
 hold off;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
@@ -147,5 +147,3 @@ p = predict(theta, X);
 fprintf('Train Accuracy: %f\n', mean(double(p == y)) * 100);
 fprintf('Expected accuracy (approx): 89.0\n');
 fprintf('\n');
-
-
