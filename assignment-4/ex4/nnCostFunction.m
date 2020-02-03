@@ -62,23 +62,45 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Calculate hypotesis function
+A1 = X;
+A1 = [ones(size(A1, 1), 1), A1];
+
+Z2 = A1 * Theta1';
+A2 = sigmoid(Z2);
+A2 = [ones(size(A2, 1), 1), A2];
+
+Z3 = A2 * Theta2';
+A3 = sigmoid(Z3);
+
+H = A3;
+
+% Format input y into boolean matrix
+Y = zeros(size(y, 1), num_labels);
+for i=1:num_labels
+    Y(:, i) = (y == i);
+endfor
+
+% Calculate basic cost function
+J = (1/m) * sum(sum(- (Y .* log(H)) - ((1 - Y) .* log(1 - H))));
+
+J_reg = lambda/(2 * m) * (sum(sum(Theta1(:, 2:end) .^ 2)) + sum(sum(Theta2(:, 2:end) .^ 2)));
+
+J = J + J_reg;
 
 
+% Calculate backpropagation
+D3 = A3 .- Y;
 
+D2 = D3 * Theta2;
+D2 = D2(:, 2:end);
+D2 = D2 .* sigmoidGradient(Z2);
 
+Theta1(:, 1) = zeros(size(Theta1, 1), 1);
+Theta2(:, 1) = zeros(size(Theta2, 1), 1);
 
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1_grad = (1/m) .* (D2' * A1) .+ (lambda/m) .* Theta1;
+Theta2_grad = (1/m) .* (D3' * A2) .+ (lambda/m) .* Theta2;
 
 % -------------------------------------------------------------
 
