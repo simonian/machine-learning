@@ -218,3 +218,36 @@ end
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
+
+%% =========== Part 9: Computing test set error (Optional) =============
+%  We found out that the "best" lambda value for out data is 3
+%  Lets calculate test set error rate
+%
+
+lambda = 3;
+[theta] = trainLinearReg(X_poly, y, lambda);
+error_test = linearRegCostFunction(X_poly_test, ytest, theta, 0);
+fprintf('Polynomial Regression with the best lambda = %f\n\n', lambda);
+fprintf('Test Error: %f\n', error_test);
+
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+%% =========== Part 10: Plotting learning curves with randomly selected examples (Optional) =============
+%  Lets calculate average error rates randomly choosing samples from our data set
+%
+
+lambda = 0.01;
+
+[error_train, error_val] = ...
+    learningCurveAvg(X_poly, y, X_poly_val, yval, lambda, 50);
+
+figure(3);
+plot(1:m, error_train, 1:m, error_val);
+
+title(sprintf('Polynomial Regression Learning Curve (lambda = %f)', lambda));
+xlabel('Number of training examples')
+ylabel('Error')
+axis([0 13 0 100])
+legend('Train', 'Cross Validation')
