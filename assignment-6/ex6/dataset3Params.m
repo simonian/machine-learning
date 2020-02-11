@@ -9,7 +9,7 @@ function [C, sigma] = dataset3Params(X, y, Xval, yval)
 
 % You need to return the following variables correctly.
 C = 1;
-sigma = 0.3;
+sigma = 0.1;
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Fill in this function to return the optimal C and sigma
@@ -23,11 +23,33 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+% C_vals = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+% sigma_vals = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 
+% prediction_errors = [zeros(size(C_vals, 2), size(sigma_vals, 2))];
 
+% fprintf(['Training SVM model with different parameters C and sigma and\n' ...
+%         'calculating prediction error on the cross validation set.\n' ...
+%         'Choose C and sigma with the lowest prediction error.\n']);
 
+% for i = 1:length(C_vals)
+%     for j = 1:length(sigma_vals)
+%         model = svmTrain(X, y, C_vals(i), @(x1, x2) gaussianKernel(x1, x2, sigma_vals(j)));
+%         predictions = svmPredict(model, Xval);
+%         prediction_error = mean(double(predictions ~= yval));
 
+%         fprintf('C=%f, sigma=%f, error=%f\n', C_vals(i), sigma_vals(j), prediction_error);
+%         prediction_errors(i, j) = prediction_error;
+%     end
+% end
 
+% [minval, min_row] = min(min(prediction_errors,[],2));
+% [minval, min_col] = min(min(prediction_errors,[],1));
+
+% C = C_vals(min_row);
+% sigma = sigma_vals(min_col);
+
+% fprintf('Best parameters are C=%f, sigma=%f, which gives prediction error %f\n', C, sigma, minval);
 
 % =========================================================================
 
