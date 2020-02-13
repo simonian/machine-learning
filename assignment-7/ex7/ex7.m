@@ -171,4 +171,3 @@ title(sprintf('Compressed, with %d colors.', K));
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
-
