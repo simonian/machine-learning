@@ -40,20 +40,13 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+% Calculate cost function
+Delta = (X * Theta' - Y) .* R;
+J = 1/2 * sum(sum(Delta .^ 2)) + (lambda/2 * sum(sum(Theta .^ 2))) + (lambda/2 * sum(sum(X .^ 2)));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+% Calculate gradients
+X_grad = Delta * Theta + (lambda * X);
+Theta_grad = Delta' * X + (lambda * Theta);
 
 % =============================================================
 
